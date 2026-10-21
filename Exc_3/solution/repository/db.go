@@ -7,14 +7,11 @@ import (
 )
 
 type DatabaseHandler struct {
-	// drinks represent all available drinks
 	drinks []model.Drink
-	// orders serves as order history
 	orders []model.Order
 }
 
 func NewDatabaseHandler() *DatabaseHandler {
-	// Initialize the drinks slice with some test data
 	drinks := []model.Drink{
 		{ID: 1, Name: "Coffee", Price: 2.50, Description: "Freshly brewed coffee"},
 		{ID: 2, Name: "Tea", Price: 2.00, Description: "Hot tea"},
@@ -22,7 +19,6 @@ func NewDatabaseHandler() *DatabaseHandler {
 		{ID: 4, Name: "Orange Juice", Price: 3.00, Description: "Fresh orange juice"},
 	}
 
-	// Initialize orders slice with some test data
 	orders := []model.Order{
 		{DrinkID: 1, CreatedAt: time.Now(), Amount: 2},
 		{DrinkID: 2, CreatedAt: time.Now(), Amount: 1},
@@ -44,7 +40,6 @@ func (db *DatabaseHandler) GetOrders() []model.Order {
 }
 
 func (db *DatabaseHandler) GetTotalledOrders() map[uint64]uint64 {
-	// Key = DrinkID, value = total amount of drinks ordered
 	totalledOrders := make(map[uint64]uint64)
 
 	for _, order := range db.orders {
@@ -53,7 +48,6 @@ func (db *DatabaseHandler) GetTotalledOrders() map[uint64]uint64 {
 
 	return totalledOrders
 }
-
 func (db *DatabaseHandler) AddOrder(order *model.Order) {
 	if order.CreatedAt.IsZero() {
 		order.CreatedAt = time.Now()
